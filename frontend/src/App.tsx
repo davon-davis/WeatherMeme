@@ -1,29 +1,14 @@
-import React from "react";
-import logo from "./logo.svg";
+import React, { useState } from "react";
 import "./App.css";
-import axios from "axios";
+import { WeatherFactory, CurrentTemp } from "./weatherFactory";
+import Weather from "./Weather";
 
 function App() {
-  // const options = {
-  //   method: "GET",
-  //   url: "https://community-open-weather-map.p.rapidapi.com/forecast",
-  //   params: { q: "austin,us" },
-  //   headers: {
-  //     "X-RapidAPI-Key": "4115cbca79mshb98c674da0cbc1dp114d16jsnfe28b20a25e2",
-  //     "X-RapidAPI-Host": "community-open-weather-map.p.rapidapi.com",
-  //   },
-  // };
-  //
-  // axios
-  //   .request(options)
-  //   .then(function (response) {
-  //     console.log(response.data.list[0].main.temp);
-  //   })
-  //   .catch(function (error) {
-  //     console.error(error);
-  //   });
+  const [currentTemp] = useState<Weather>(CurrentTemp());
+  //map Very Hot, Hot, Mild, Cool, Cold, Very Cold
+  WeatherFactory();
 
-  return <div className="App"></div>;
+  return <div className="App">{currentTemp.temp}</div>;
 }
 
 export default App;
