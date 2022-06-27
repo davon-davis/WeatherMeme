@@ -35,6 +35,6 @@ export const CurrentTemp = (): Weather => {
     currentTempData.main.temp_max,
     currentTempData.main.humidity,
     currentTempData.wind.speed,
-    currentTempData.weather.description
+    currentTempData.weather[0].description
   );
 };
