@@ -1,6 +1,8 @@
 import { WeatherTempType } from "./WeatherTempType";
 
 export default class Weather {
+  city: string;
+
   temp: number;
 
   feelsLike: number;
@@ -18,6 +20,7 @@ export default class Weather {
   tempType: WeatherTempType;
 
   constructor(
+    city: string,
     temp: number,
     feelsLike: number,
     tempMin: number,
@@ -26,6 +29,7 @@ export default class Weather {
     windSpeed: number,
     description: string
   ) {
+    this.city = city;
     this.temp = temp;
     this.feelsLike = feelsLike;
     this.tempMin = tempMin;

@@ -12,6 +12,7 @@ export const WeatherFactory = () => {
   console.log(forecastData);
   forecastData.forEach((day) => {
     let weather: Weather = new Weather(
+      day.name,
       kelvinToFahrenheit(day.main.temp),
       day.main.feels_like,
       day.main.temp_min,
@@ -29,7 +30,8 @@ export const CurrentTemp = (): Weather => {
   const currentTempData = require("./currentWeather.json");
 
   return new Weather(
-    currentTempData.main.temp,
+    currentTempData.name,
+    Math.ceil(currentTempData.main.temp),
     currentTempData.main.feels_like,
     currentTempData.main.temp_min,
     currentTempData.main.temp_max,
