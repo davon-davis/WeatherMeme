@@ -47,22 +47,45 @@ function App() {
         height: "100vh",
         width: "100vw",
         display: "flex",
-        justifyContent: "center",
       }}
     >
       <Box
         sx={{
+          backgroundColor: "#ffffff73",
+          height: "2rem",
+          width: "100vw",
+          display: "inline-flex",
+        }}
+      >
+        <Box
+          sx={{
+            display: "flex",
+            width: "50%",
+            padding: ".5rem 0 0 2rem",
+            justifyContent: "left",
+          }}
+        >
+          <Typography
+            sx={{ fontFamily: "copperplate,fantasy", fontSize: "14px" }}
+          >
+            WeatherMeme
+          </Typography>
+        </Box>
+      </Box>
+      <Box
+        sx={{
           width: "36rem",
           height: "13rem",
-          backgroundColor: "green",
+          backgroundColor: "#000080",
           border: ".05rem solid white",
           display: "flex",
           flexDirection: "column",
           borderRadius: "0.5rem 0.5rem 0rem 0rem",
+          justifyContent: "center",
         }}
         data-testid={"current-temp"}
       >
-        <Typography>{currentTemp.city}</Typography>
+        <Typography sx={{ color: "white" }}>{currentTemp.city}</Typography>
         <Box
           sx={{
             width: "36rem",
