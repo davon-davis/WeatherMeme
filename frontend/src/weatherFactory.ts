@@ -32,11 +32,13 @@ export const CurrentTemp = (): Weather => {
   return new Weather(
     currentTempData.name,
     Math.ceil(currentTempData.main.temp),
-    currentTempData.main.feels_like,
-    currentTempData.main.temp_min,
-    currentTempData.main.temp_max,
+    Math.ceil(currentTempData.main.feels_like),
+    Math.ceil(currentTempData.main.temp_min),
+    Math.ceil(currentTempData.main.temp_max),
     currentTempData.main.humidity,
     currentTempData.wind.speed,
     currentTempData.weather[0].description
   );
 };
+
+// export const TodaysForecast = ():

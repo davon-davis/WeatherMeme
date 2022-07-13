@@ -2,10 +2,12 @@ import React, { useState } from "react";
 import "./App.css";
 import { WeatherFactory, CurrentTemp } from "./weatherFactory";
 import Weather from "./Weather";
-import { Box, Container, Typography } from "@mui/material";
+import { Box, Container, Divider, Typography } from "@mui/material";
 
 function App() {
   const [currentTemp] = useState<Weather>(CurrentTemp());
+  // const [];
+
   //map Very Hot, Hot, Mild, Cool, Cold, Very Cold
   WeatherFactory();
 
@@ -47,6 +49,7 @@ function App() {
         height: "100vh",
         width: "100vw",
         display: "flex",
+        flexDirection: "column",
       }}
     >
       <Box
@@ -82,6 +85,9 @@ function App() {
           flexDirection: "column",
           borderRadius: "0.5rem 0.5rem 0rem 0rem",
           justifyContent: "center",
+          alignSelf: "center",
+          paddingTop: "1rem",
+          marginTop: "2rem",
         }}
         data-testid={"current-temp"}
       >
@@ -101,13 +107,63 @@ function App() {
             <Typography sx={{ fontSize: "3rem", color: "black" }}>
               {currentTemp.temp}°
             </Typography>
-            <Typography sx={{ fontSize: "2rem", color: "black" }}>
+            <Typography
+              sx={{
+                fontSize: "2rem",
+                color: "black",
+                textTransform: "capitalize",
+              }}
+            >
               {currentTemp.description}
+            </Typography>
+            <Typography sx={{ fontSize: "2rem", color: "black" }}>
+              Day {currentTemp.tempMax}° Night {currentTemp.tempMin}°
             </Typography>
           </Box>
           <Box sx={{ flexDirection: "row" }}>
             <img src={require("./assets/fanning.gif")} alt={"hot-gif"} />
           </Box>
+        </Box>
+      </Box>
+      <Box
+        sx={{
+          width: "36rem",
+          height: "13rem",
+          display: "flex",
+          flexDirection: "column",
+          paddingTop: "1rem",
+          alignSelf: "center",
+        }}
+      >
+        <Box
+          sx={{
+            width: "36rem",
+            height: "2rem",
+            backgroundColor: "white",
+            border: ".05rem solid white",
+            borderRadius: "0.5rem 0.5rem 0rem 0rem  ",
+          }}
+        >
+          <Typography>Today's Forecast for {currentTemp.city}</Typography>
+        </Box>
+        <Box
+          sx={{
+            width: "36rem",
+            height: "13rem",
+            backgroundColor: "white",
+            border: ".05rem solid white",
+            display: "flex",
+            justifyContent: "space-between",
+            borderRadius: "0rem 0rem 0.5rem 0.5rem ",
+          }}
+        >
+          <Typography>Morning</Typography>
+          <Divider orientation="vertical" />
+          <Typography>Afternoon</Typography>
+          <Divider orientation="vertical" />
+          <Typography>Evening</Typography>
+          <Divider orientation="vertical" />
+          <Typography>Overnight</Typography>
         </Box>
       </Box>
     </Box>
