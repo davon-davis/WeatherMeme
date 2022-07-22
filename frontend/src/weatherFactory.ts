@@ -4,26 +4,26 @@ const kelvinToFahrenheit = (tempToConvert: number): number => {
   return Math.round((tempToConvert - 273.15) * (9 / 5) + 32);
 };
 
-export const WeatherFactory = () => {
+export const FiveDayForecast = (): Weather[] => {
   const weatherData = require("./fiveDayForecast.json");
   let fiveDayForecast: Weather[] = [];
 
   const forecastData: any[] = weatherData[0].list;
-  console.log(forecastData);
   forecastData.forEach((day) => {
     let weather: Weather = new Weather(
-      day.name,
-      kelvinToFahrenheit(day.main.temp),
-      day.main.feels_like,
-      day.main.temp_min,
-      day.main.temp_max,
+      weatherData[0].city.name,
+      Math.ceil(kelvinToFahrenheit(day.main.temp)),
+      Math.ceil(kelvinToFahrenheit(day.main.feels_like)),
+      Math.ceil(kelvinToFahrenheit(day.main.temp_min)),
+      Math.ceil(kelvinToFahrenheit(day.main.temp_max)),
       day.main.humidity,
-      day.wind.speed,
+      Math.ceil(day.wind.speed),
+      day.weather[0].description,
       day.dt_txt
     );
     fiveDayForecast.push(weather);
-    // console.log(day.dt_txt + " " + kelvinToFahrenheit(day.main.temp));
   });
+  return fiveDayForecast;
 };
 
 export const CurrentTemp = (): Weather => {
