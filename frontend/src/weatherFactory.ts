@@ -5,7 +5,7 @@ const kelvinToFahrenheit = (tempToConvert: number): number => {
 };
 
 export const FiveDayForecast = (): Weather[] => {
-  const weatherData = require("./fiveDayForecast.json");
+  const weatherData = require("./fiveDayHourlyForecast.json");
   let fiveDayForecast: Weather[] = [];
 
   const forecastData: any[] = weatherData[0].list;
@@ -39,6 +39,29 @@ export const CurrentTemp = (): Weather => {
     currentTempData.wind.speed,
     currentTempData.weather[0].description
   );
+};
+
+export const hourlyForecast = (): Weather[] => {
+  const data = require("./fiveDayHourlyForecast.json");
+  const hourlyData = data[0].list;
+  const hourlyWeather: Weather[] = [];
+
+  hourlyData.forEach((hour: any) => {
+    let weather = new Weather(
+      data[0].city.name,
+      Math.ceil(kelvinToFahrenheit(hour.main.temp)),
+      Math.ceil(kelvinToFahrenheit(hour.main.feels_like)),
+      Math.ceil(kelvinToFahrenheit(hour.main.temp_min)),
+      Math.ceil(kelvinToFahrenheit(hour.main.temp_max)),
+      hour.main.humidity,
+      Math.ceil(hour.wind.speed),
+      hour.weather[0].description,
+      hour.dt_txt
+    );
+    hourlyWeather.push(weather);
+  });
+
+  return hourlyWeather;
 };
 
 // export const TodaysForecast = ():

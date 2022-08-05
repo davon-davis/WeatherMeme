@@ -2,10 +2,9 @@ import React, { useState } from "react";
 import "./App.css";
 import { FiveDayForecast, CurrentTemp } from "./weatherFactory";
 import Weather from "./Weather";
-import { Box, Divider, Typography } from "@mui/material";
-import CurrentTempContainer from "./CurrentTempContainer";
-import FiveDayForeCastContainer from "./FiveDayForeCastContainer";
+import { Box } from "@mui/material";
 import Banner from "./Banner";
+import WeatherTabs from "./WeatherTabs";
 
 function App() {
   const [currentTemp] = useState<Weather>(CurrentTemp());
@@ -47,22 +46,13 @@ function App() {
   };
 
   return (
-    <Box
-      sx={{
-        backgroundColor: getBgColor(),
-        height: "100vh",
-        width: "100vw",
-        display: "flex",
-        flexDirection: "column",
-      }}
-    >
+    <>
       <Banner />
-      <CurrentTempContainer currentTemp={currentTemp} />
-      <FiveDayForeCastContainer
+      <WeatherTabs
         currentTemp={currentTemp}
         currentDayForecast={currentDayForecast}
       />
-    </Box>
+    </>
   );
 }
 

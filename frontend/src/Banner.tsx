@@ -8,7 +8,8 @@ export default function Banner() {
         backgroundColor: "#ffffff73",
         height: "2rem",
         width: "100vw",
-        display: "inline-flex",
+        display: "flex",
+        flexDirection: "column",
       }}
     >
       <Box
