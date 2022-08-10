@@ -1,16 +1,9 @@
 import React, { useState } from "react";
 import "./App.css";
-import { threeDayForecastData, currentForecastData } from "./weatherFactory";
-import Weather from "./Weather";
 import Banner from "./Banner";
 import WeatherTabs from "./WeatherTabs";
-import axios from "axios";
-import Day from "./Day";
 
 function App() {
-  const [currentTemp] = useState<Weather>(currentForecastData());
-  const [threeDayForecast] = useState<Day[]>(threeDayForecastData());
-
   // const getBgColor = (): string => {
   //   if (currentTemp.description === "clear sky") {
   //     return "#87CEEB";
@@ -45,10 +38,7 @@ function App() {
   return (
     <>
       <Banner />
-      <WeatherTabs
-        currentTemp={currentTemp}
-        threeDayForecast={threeDayForecast}
-      />
+      <WeatherTabs />
     </>
   );
 }

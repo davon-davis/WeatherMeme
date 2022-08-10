@@ -5,10 +5,8 @@ import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import CurrentDayTemp from "./CurrentDayTemp";
 import CurrentDayForecast from "./CurrentDayForecast";
-import Weather from "./Weather";
 import { styled } from "@mui/material";
 import ThreeDayForecast from "./ThreeDayForecast";
-import Day from "./Day";
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -88,15 +86,7 @@ const StyledTab = styled((props: StyledTabProps) => (
   },
 }));
 
-interface WeatherTabsProps {
-  currentTemp: Weather;
-  threeDayForecast: Day[];
-}
-
-export default function WeatherTabs(props: WeatherTabsProps) {
-  const { currentTemp, threeDayForecast } = props;
-  let currentDay = threeDayForecast[0];
-
+export default function WeatherTabs() {
   const [value, setValue] = React.useState(0);
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
@@ -125,7 +115,6 @@ export default function WeatherTabs(props: WeatherTabsProps) {
         <StyledTabs value={value} onChange={handleChange}>
           <StyledTab label="Today" {...a11yProps(0)} />
           <StyledTab label="Hourly" {...a11yProps(1)} />
-          {/*<StyledTab label="Item Three" {...a11yProps(2)} />*/}
         </StyledTabs>
         <TabPanel value={value} index={0}>
           <CurrentDayTemp />
@@ -134,9 +123,6 @@ export default function WeatherTabs(props: WeatherTabsProps) {
         <TabPanel value={value} index={1}>
           <ThreeDayForecast />
         </TabPanel>
-        {/*<TabPanel value={value} index={2}>*/}
-        {/*  Item Three*/}
-        {/*</TabPanel>*/}
       </Box>
     </Box>
   );
