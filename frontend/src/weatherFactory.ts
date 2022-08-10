@@ -1,67 +1,47 @@
 import Weather from "./Weather";
+import Day from "./Day";
 
-const kelvinToFahrenheit = (tempToConvert: number): number => {
-  return Math.round((tempToConvert - 273.15) * (9 / 5) + 32);
-};
-
-export const FiveDayForecast = (): Weather[] => {
-  const weatherData = require("./fiveDayHourlyForecast.json");
-  let fiveDayForecast: Weather[] = [];
-
-  const forecastData: any[] = weatherData[0].list;
-  forecastData.forEach((day) => {
-    let weather: Weather = new Weather(
-      weatherData[0].city.name,
-      Math.ceil(kelvinToFahrenheit(day.main.temp)),
-      Math.ceil(kelvinToFahrenheit(day.main.feels_like)),
-      Math.ceil(kelvinToFahrenheit(day.main.temp_min)),
-      Math.ceil(kelvinToFahrenheit(day.main.temp_max)),
-      day.main.humidity,
-      Math.ceil(day.wind.speed),
-      day.weather[0].description,
-      day.dt_txt
-    );
-    fiveDayForecast.push(weather);
-  });
-  return fiveDayForecast;
-};
-
-export const CurrentTemp = (): Weather => {
-  const currentTempData = require("./currentWeather.json");
+export const currentForecastData = (): Weather => {
+  const data = require("./forecast.json");
 
   return new Weather(
-    currentTempData.name,
-    Math.ceil(currentTempData.main.temp),
-    Math.ceil(currentTempData.main.feels_like),
-    Math.ceil(currentTempData.main.temp_min),
-    Math.ceil(currentTempData.main.temp_max),
-    currentTempData.main.humidity,
-    currentTempData.wind.speed,
-    currentTempData.weather[0].description
+    data.location.name,
+    data.current.temp_f,
+    data.current.feelslike_f,
+    Math.ceil(data.forecast.forecastday[0].day.mintemp_f),
+    Math.ceil(data.forecast.forecastday[0].day.maxtemp_f),
+    data.current.humidity,
+    data.current.wind_mph,
+    data.current.condition.text
   );
 };
 
-export const hourlyForecast = (): Weather[] => {
-  const data = require("./fiveDayHourlyForecast.json");
-  const hourlyData = data[0].list;
+export const threeDayForecastData = (): Day[] => {
+  const data = require("./forecast.json");
+  const threeDays: Day[] = [];
   const hourlyWeather: Weather[] = [];
 
-  hourlyData.forEach((hour: any) => {
-    let weather = new Weather(
-      data[0].city.name,
-      Math.ceil(kelvinToFahrenheit(hour.main.temp)),
-      Math.ceil(kelvinToFahrenheit(hour.main.feels_like)),
-      Math.ceil(kelvinToFahrenheit(hour.main.temp_min)),
-      Math.ceil(kelvinToFahrenheit(hour.main.temp_max)),
-      hour.main.humidity,
-      Math.ceil(hour.wind.speed),
-      hour.weather[0].description,
-      hour.dt_txt
-    );
-    hourlyWeather.push(weather);
+  const forecastDays = data.forecast.forecastday;
+
+  forecastDays.forEach((day: any) => {
+    day.hour.forEach((hour: any) => {
+      let weather = new Weather(
+        data.location.name,
+        Math.ceil(hour.temp_f),
+        Math.ceil(hour.feelslike_f),
+        Math.ceil(data.forecast.forecastday[0].day.mintemp_f),
+        Math.ceil(data.forecast.forecastday[0].day.maxtemp_f),
+        hour.humidity,
+        hour.wind_mph,
+        hour.condition.text
+      );
+      weather.setTime(hour.time);
+      hourlyWeather.push(weather);
+    });
+
+    let newDay = new Day(currentForecastData(), hourlyWeather);
+    threeDays.push(newDay);
   });
 
-  return hourlyWeather;
+  return threeDays;
 };
-
-// export const TodaysForecast = ():

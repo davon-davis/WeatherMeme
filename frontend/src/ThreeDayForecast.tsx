@@ -1,30 +1,31 @@
+import React from "react";
 import {
   Box,
   List,
   ListItem,
   ListItemButton,
   ListItemText,
+  Typography,
 } from "@mui/material";
-import Weather from "./Weather";
-import { hourlyForecast } from "./weatherFactory";
+import { threeDayForecastData } from "./weatherFactory";
+import Day from "./Day";
 
-interface HourlyContainer {
-  currentTemp: Weather;
-}
+export default function ThreeDayForecast() {
+  const threeDayForecast: Day[] = threeDayForecastData();
 
-export default function HourlyContainer() {
-  // const { currentTemp } = props;
-  const hourly = hourlyForecast();
   const listItems: any = [];
 
-  hourly.forEach((hour) => {
-    listItems.push(
-      <ListItem disablePadding>
-        <ListItemButton component="a" href="#simple-list">
-          <ListItemText primary={hour.temp} />
-        </ListItemButton>
-      </ListItem>
-    );
+  threeDayForecast.forEach((day) => {
+    day.hourlyForecast.forEach((hour) => {
+      listItems.push(
+        <ListItem disablePadding>
+          <ListItemButton component="a" href="#simple-list">
+            <Typography>{hour.time}</Typography>
+            <ListItemText primary={hour.temp} />
+          </ListItemButton>
+        </ListItem>
+      );
+    });
   });
 
   return (

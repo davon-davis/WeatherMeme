@@ -3,11 +3,12 @@ import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
-import CurrentTempContainer from "./CurrentTempContainer";
-import FiveDayForeCastContainer from "./FiveDayForeCastContainer";
+import CurrentDayTemp from "./CurrentDayTemp";
+import CurrentDayForecast from "./CurrentDayForecast";
 import Weather from "./Weather";
 import { styled } from "@mui/material";
-import HourlyContainer from "./HourlyContainer";
+import ThreeDayForecast from "./ThreeDayForecast";
+import Day from "./Day";
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -27,7 +28,7 @@ function TabPanel(props: TabPanelProps) {
       {...other}
     >
       {value === index && (
-        <Box sx={{ p: 3 }}>
+        <Box sx={{ p: 0 }}>
           <Typography>{children}</Typography>
         </Box>
       )}
@@ -73,6 +74,7 @@ interface StyledTabProps {
 const StyledTab = styled((props: StyledTabProps) => (
   <Tab disableRipple {...props} />
 ))(({ theme }) => ({
+  padding: 0,
   textTransform: "none",
   fontWeight: theme.typography.fontWeightRegular,
   fontSize: theme.typography.pxToRem(15),
@@ -88,11 +90,12 @@ const StyledTab = styled((props: StyledTabProps) => (
 
 interface WeatherTabsProps {
   currentTemp: Weather;
-  currentDayForecast: Weather[];
+  threeDayForecast: Day[];
 }
 
 export default function WeatherTabs(props: WeatherTabsProps) {
-  const { currentTemp, currentDayForecast } = props;
+  const { currentTemp, threeDayForecast } = props;
+  let currentDay = threeDayForecast[0];
 
   const [value, setValue] = React.useState(0);
 
@@ -117,7 +120,6 @@ export default function WeatherTabs(props: WeatherTabsProps) {
           width: "100vw",
           display: "flex",
           flexDirection: "column",
-          padding: "0px",
         }}
       >
         <StyledTabs value={value} onChange={handleChange}>
@@ -126,14 +128,11 @@ export default function WeatherTabs(props: WeatherTabsProps) {
           {/*<StyledTab label="Item Three" {...a11yProps(2)} />*/}
         </StyledTabs>
         <TabPanel value={value} index={0}>
-          <CurrentTempContainer currentTemp={currentTemp} />
-          <FiveDayForeCastContainer
-            currentTemp={currentTemp}
-            currentDayForecast={currentDayForecast}
-          />
+          <CurrentDayTemp />
+          <CurrentDayForecast />
         </TabPanel>
         <TabPanel value={value} index={1}>
-          <HourlyContainer />
+          <ThreeDayForecast />
         </TabPanel>
         {/*<TabPanel value={value} index={2}>*/}
         {/*  Item Three*/}

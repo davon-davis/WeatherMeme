@@ -19,7 +19,9 @@ export default class Weather {
 
   tempType: WeatherTempType;
 
-  date?: string;
+  time?: string;
+
+  precipitation?: string;
 
   constructor(
     city: string,
@@ -30,7 +32,8 @@ export default class Weather {
     humidity: number,
     windSpeed: number,
     description: string,
-    date?: string
+    time?: string,
+    precipitation?: string
   ) {
     this.city = city;
     this.temp = temp;
@@ -41,7 +44,8 @@ export default class Weather {
     this.windSpeed = windSpeed;
     this.description = description;
     this.tempType = this.getTempType(temp);
-    this.date = date;
+    this.time = time;
+    this.precipitation = precipitation;
   }
 
   getTempType = (temp: number): WeatherTempType => {
@@ -51,5 +55,14 @@ export default class Weather {
     return "Mild";
   };
 
+  setTime = (time: string): void => {
+    this.time = time;
+  };
+
   //getTempMeme return "very hot"
+  // getWeatherIcon = () => {
+  //   if (this.description === "light rain") {
+  //     return;
+  //   }
+  // };
 }

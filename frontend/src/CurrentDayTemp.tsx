@@ -1,12 +1,9 @@
+import React from "react";
 import { Box, Typography } from "@mui/material";
-import Weather from "./Weather";
+import { currentForecastData } from "./weatherFactory";
 
-interface CurrentTempContainerProps {
-  currentTemp: Weather;
-}
-
-export default function CurrentTempContainer(props: CurrentTempContainerProps) {
-  const { currentTemp } = props;
+export default function CurrentDayTemp() {
+  const currentTemp = currentForecastData();
 
   return (
     <Box sx={{ display: "flex", flexDirection: "column" }}>
