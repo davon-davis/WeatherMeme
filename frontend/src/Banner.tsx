@@ -6,7 +6,7 @@ export default function Banner() {
     <Box
       sx={{
         backgroundColor: "#ffffff73",
-        height: "2rem",
+        height: "3rem",
         width: "100vw",
         display: "flex",
         flexDirection: "column",
@@ -16,12 +16,12 @@ export default function Banner() {
         sx={{
           display: "flex",
           width: "50%",
-          padding: ".5rem 0 0 2rem",
+          padding: ".5rem 0 0 1rem",
           justifyContent: "left",
         }}
       >
         <Typography
-          sx={{ fontFamily: "copperplate,fantasy", fontSize: "14px" }}
+          sx={{ fontFamily: "copperplate,fantasy", fontSize: "21px" }}
         >
           WeatherMeme
         </Typography>

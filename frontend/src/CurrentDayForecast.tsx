@@ -1,19 +1,10 @@
 import { Box, Divider, Typography } from "@mui/material";
 import React from "react";
-// @ts-ignore
-import { WiDaySunny } from "weather-icons-react";
 import { threeDayForecastData } from "./weatherFactory";
 
 export default function CurrentDayForecast() {
   const currentDay = threeDayForecastData()[0];
   const currentDayForecast = currentDay.hourlyForecast;
-
-  let getWeatherImage = () => {
-    console.log(currentDay.currentForecast.description);
-    if (currentDay.currentForecast.description === "Partly cloudy") {
-      return <WiDaySunny size={60} />;
-    }
-  };
 
   return (
     <Box sx={{ display: "flex", flexDirection: "column" }}>
@@ -57,7 +48,12 @@ export default function CurrentDayForecast() {
             <Typography variant="h4" sx={{ color: "blue", padding: 0 }}>
               {currentDayForecast[6].temp}°
             </Typography>
-            {getWeatherImage()}
+            <Box
+              component="img"
+              sx={{ height: "5rem", width: "5rem" }}
+              src={currentDayForecast[6].descriptionImage}
+              alt="description-image"
+            />
           </Box>
           <Divider orientation="vertical" />
           <Box>
@@ -65,7 +61,12 @@ export default function CurrentDayForecast() {
             <Typography variant="h4" sx={{ color: "blue" }}>
               {currentDayForecast[12].temp}°
             </Typography>
-            {getWeatherImage()}
+            <Box
+              component="img"
+              sx={{ height: "5rem", width: "5rem" }}
+              src={currentDayForecast[12].descriptionImage}
+              alt="description-image"
+            />
             <Typography>{}</Typography>
           </Box>
           <Divider orientation="vertical" />
@@ -74,7 +75,12 @@ export default function CurrentDayForecast() {
             <Typography variant="h4" sx={{ color: "blue" }}>
               {currentDayForecast[18].temp}°
             </Typography>
-            {getWeatherImage()}
+            <Box
+              component="img"
+              sx={{ height: "5rem", width: "5rem" }}
+              src={currentDayForecast[18].descriptionImage}
+              alt="description-image"
+            />
           </Box>
           <Divider orientation="vertical" />
           <Box>
@@ -82,7 +88,12 @@ export default function CurrentDayForecast() {
             <Typography variant="h4" sx={{ color: "blue" }}>
               {currentDayForecast[23].temp}°
             </Typography>
-            {getWeatherImage()}
+            <Box
+              component="img"
+              sx={{ height: "5rem", width: "5rem" }}
+              src={currentDayForecast[23].descriptionImage}
+              alt="description-image"
+            />
           </Box>
         </Box>
       </Box>

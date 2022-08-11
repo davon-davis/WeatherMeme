@@ -11,8 +11,9 @@ export const currentForecastData = (): Weather => {
     Math.ceil(data.forecast.forecastday[0].day.mintemp_f),
     Math.ceil(data.forecast.forecastday[0].day.maxtemp_f),
     data.current.humidity,
-    data.current.wind_mph,
-    data.current.condition.text
+    Math.ceil(data.current.wind_mph),
+    data.current.condition.text,
+    data.location.localtime
   );
 };
 
@@ -32,10 +33,16 @@ export const threeDayForecastData = (): Day[] => {
         Math.ceil(data.forecast.forecastday[0].day.mintemp_f),
         Math.ceil(data.forecast.forecastday[0].day.maxtemp_f),
         hour.humidity,
-        hour.wind_mph,
-        hour.condition.text
+        Math.ceil(hour.wind_mph),
+        hour.condition.text,
+        hour.time
       );
-      weather.setTime(hour.time);
+      if (hour.will_it_rain === 1) {
+        weather.setPrecipitation(hour.chance_of_rain);
+      }
+      weather.setWindDirection(hour.wind_dir);
+      weather.setDescriptionImage(hour.condition.icon);
+
       hourlyWeather.push(weather);
     });
 

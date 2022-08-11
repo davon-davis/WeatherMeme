@@ -17,11 +17,15 @@ export default class Weather {
 
   description: string;
 
+  time: string;
+
   tempType: WeatherTempType;
 
-  time?: string;
+  precipitation?: number;
 
-  precipitation?: string;
+  windDirection?: string;
+
+  descriptionImage?: string;
 
   constructor(
     city: string,
@@ -32,8 +36,7 @@ export default class Weather {
     humidity: number,
     windSpeed: number,
     description: string,
-    time?: string,
-    precipitation?: string
+    time: string
   ) {
     this.city = city;
     this.temp = temp;
@@ -45,7 +48,6 @@ export default class Weather {
     this.description = description;
     this.tempType = this.getTempType(temp);
     this.time = time;
-    this.precipitation = precipitation;
   }
 
   getTempType = (temp: number): WeatherTempType => {
@@ -57,6 +59,18 @@ export default class Weather {
 
   setTime = (time: string): void => {
     this.time = time;
+  };
+
+  setPrecipitation = (chance: number): void => {
+    this.precipitation = chance;
+  };
+
+  setWindDirection = (direction: string): void => {
+    this.windDirection = direction;
+  };
+
+  setDescriptionImage = (image: string): void => {
+    this.descriptionImage = image;
   };
 
   //getTempMeme return "very hot"
