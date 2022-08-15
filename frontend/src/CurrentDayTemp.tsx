@@ -11,7 +11,7 @@ export default function CurrentDayTemp() {
         sx={{
           width: "36rem",
           height: "13rem",
-          backgroundColor: "#000080",
+          backgroundColor: "#348ABF",
           border: ".05rem solid white",
           display: "flex",
           flexDirection: "column",

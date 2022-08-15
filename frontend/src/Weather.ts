@@ -17,6 +17,8 @@ export default class Weather {
 
   description: string;
 
+  date: string;
+
   time: string;
 
   tempType: WeatherTempType;
@@ -36,6 +38,7 @@ export default class Weather {
     humidity: number,
     windSpeed: number,
     description: string,
+    date: string,
     time: string
   ) {
     this.city = city;
@@ -47,6 +50,7 @@ export default class Weather {
     this.windSpeed = windSpeed;
     this.description = description;
     this.tempType = this.getTempType(temp);
+    this.date = date;
     this.time = time;
   }
 

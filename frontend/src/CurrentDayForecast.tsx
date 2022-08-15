@@ -1,10 +1,32 @@
 import { Box, Divider, Typography } from "@mui/material";
-import React from "react";
+import React, { useState } from "react";
 import { threeDayForecastData } from "./weatherFactory";
 
 export default function CurrentDayForecast() {
   const currentDay = threeDayForecastData()[0];
   const currentDayForecast = currentDay.hourlyForecast;
+  const [listItems] = useState<any>([]);
+
+  function getCurrentDayForecast(): any {
+    for (let i: number = 0; currentDayForecast.length - 1; i++) {
+      if (i % 6 || i === 23) {
+        listItems.push(
+          <Box>
+            <Typography variant="h5">Morning</Typography>
+            <Typography variant="h4" sx={{ color: "blue", padding: 0 }}>
+              {currentDayForecast[i].temp}°
+            </Typography>
+            <Box
+              component="img"
+              sx={{ height: "5rem", width: "5rem" }}
+              src={currentDayForecast[i].descriptionImage}
+              alt="description-image"
+            />
+          </Box>
+        );
+      }
+    }
+  }
 
   return (
     <Box sx={{ display: "flex", flexDirection: "column" }}>
@@ -50,7 +72,7 @@ export default function CurrentDayForecast() {
             </Typography>
             <Box
               component="img"
-              sx={{ height: "5rem", width: "5rem" }}
+              sx={{ height: "4rem", width: "4rem" }}
               src={currentDayForecast[6].descriptionImage}
               alt="description-image"
             />
@@ -63,7 +85,7 @@ export default function CurrentDayForecast() {
             </Typography>
             <Box
               component="img"
-              sx={{ height: "5rem", width: "5rem" }}
+              sx={{ height: "4rem", width: "4rem" }}
               src={currentDayForecast[12].descriptionImage}
               alt="description-image"
             />
@@ -77,7 +99,7 @@ export default function CurrentDayForecast() {
             </Typography>
             <Box
               component="img"
-              sx={{ height: "5rem", width: "5rem" }}
+              sx={{ height: "4rem", width: "4rem" }}
               src={currentDayForecast[18].descriptionImage}
               alt="description-image"
             />
@@ -90,7 +112,7 @@ export default function CurrentDayForecast() {
             </Typography>
             <Box
               component="img"
-              sx={{ height: "5rem", width: "5rem" }}
+              sx={{ height: "4rem", width: "4rem" }}
               src={currentDayForecast[23].descriptionImage}
               alt="description-image"
             />

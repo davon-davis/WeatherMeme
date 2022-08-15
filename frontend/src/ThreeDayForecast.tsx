@@ -1,5 +1,12 @@
-import React from "react";
-import { Box, List, ListItem, ListItemButton, Typography } from "@mui/material";
+import React, { useEffect, useState } from "react";
+import {
+  Box,
+  Divider,
+  List,
+  ListItem,
+  ListItemButton,
+  Typography,
+} from "@mui/material";
 import { currentForecastData, threeDayForecastData } from "./weatherFactory";
 import Day from "./Day";
 // @ts-ignore
@@ -9,20 +16,38 @@ import Weather from "./Weather";
 export default function ThreeDayForecast() {
   const threeDayForecast: Day[] = threeDayForecastData();
   const current: Weather = currentForecastData();
-  const listItems: any = [];
+  const [listItems] = useState<any>([]);
 
   threeDayForecast.forEach((day) => {
+    listItems.push(
+      <>
+        <Divider />
+        <ListItem disablePadding>
+          <ListItemButton component="a" href="#simple-list">
+            <Typography
+              sx={{
+                width: "15rem",
+                fontWeight: "bold",
+                fontSize: "1.5rem",
+              }}
+            >
+              {day.currentForecast.date}
+            </Typography>
+          </ListItemButton>
+        </ListItem>
+        <Divider />
+      </>
+    );
     day.hourlyForecast.forEach((hour) => {
-      let time = hour.time.substring(10, hour.time.length);
       listItems.push(
         <ListItem disablePadding>
           <ListItemButton component="a" href="#simple-list">
-            <Typography>{time}</Typography>
+            <Typography>{hour.time}</Typography>
             <Typography
               sx={{
-                paddingLeft: 2,
                 width: "3rem",
                 fontWeight: "bold",
+                paddingLeft: 2,
               }}
               variant={"h5"}
             >
@@ -52,7 +77,7 @@ export default function ThreeDayForecast() {
       sx={{
         display: "flex",
         flexDirection: "column",
-        background: "#D3D3D3",
+        background: "linear-gradient(#77B3D9, #CEE8F2)",
       }}
     >
       <Box
@@ -66,11 +91,15 @@ export default function ThreeDayForecast() {
           borderRadius: "0.5rem 0.5rem 0.5rem 0.5rem",
           justifyContent: "center",
           alignSelf: "center",
-          marginTop: "2rem",
+          margin: "2rem 0rem 2rem 0rem",
+          // paddingLeft: ,
         }}
         data-testid={"current-temp"}
       >
-        <Typography>Hourly Weather - {current.city}</Typography>
+        <Typography sx={{ paddingLeft: 2 }}>
+          <strong>Hourly Weather</strong> - {current.city}
+        </Typography>
+        <Typography sx={{ paddingLeft: 2 }}>As of {current.time}</Typography>
         <List>{listItems}</List>
       </Box>
     </Box>

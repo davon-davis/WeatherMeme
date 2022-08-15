@@ -61,7 +61,7 @@ const StyledTabs = styled((props: StyledTabsProps) => (
   "& .MuiTabs-indicatorSpan": {
     maxWidth: 40,
     width: "100%",
-    backgroundColor: "#635ee7",
+    backgroundColor: "white",
   },
 });
 
@@ -79,7 +79,7 @@ const StyledTab = styled((props: StyledTabProps) => (
   marginRight: theme.spacing(1),
   color: "rgba(255, 255, 255, 0.7)",
   "&.Mui-selected": {
-    color: "#fff",
+    color: "white",
   },
   "&.Mui-focusVisible": {
     backgroundColor: "rgba(100, 95, 228, 0.32)",
@@ -91,6 +91,7 @@ export default function WeatherTabs() {
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
+    event.preventDefault();
   };
 
   return (
@@ -98,14 +99,14 @@ export default function WeatherTabs() {
       sx={{
         height: "100vh",
         width: "100vw",
-        backgroundColor: "#D3D3D3",
+        background: "linear-gradient(#77B3D9, #CEE8F2)",
         display: "flex",
         flexDirection: "column",
       }}
     >
       <Box
         sx={{
-          backgroundColor: "#000080",
+          backgroundColor: "#348ABF",
           height: "3.5rem",
           width: "100vw",
           display: "flex",
